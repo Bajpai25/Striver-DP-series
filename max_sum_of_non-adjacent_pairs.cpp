@@ -64,24 +64,25 @@ int max_sum(vector<int>&nums){
 
 // Approach 3 : Space optimisation Intuition : We only need to keep track of last two elements
 
-int max_sum(vector<int>&nums){
+#include <bits/stdc++.h> 
+int maximumNonAdjacentSum(vector<int> &nums){
+    // Write your code here.
+   int n=nums.size();
 
-    int n=nums.size();
+   int prev1=nums[0];
+   int prev2=0;
 
-    int prev1=nums[0]; // prev for dp[i-1]
+   for(int i=1;i<n;i++){
+     int pick=nums[i];
+     if(i>1){
+       pick+=prev2;
+     }
+     int notpick=0+prev1;
 
-    int prev2=0;  // prev for dp[i-2]
-
-    for(int i=1;i<n;i++){
-        int pick=nums[i];
-        if(i>1){
-            pick+=prev2;
-        }
-
-        int notpick=0 +prev1;
-
-        int curr=max(prev1,prev2);
-    }
-
-    return prev1;
-} 
+     int curr=max(pick,notpick);
+     prev2=prev1;
+     prev1=curr;
+   
+   }
+   return prev1;
+}
